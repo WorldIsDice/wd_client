@@ -46,6 +46,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+/new/
 
 # Symbolication related
 app.*.symbols
@@ -63,5 +64,3 @@ app.*.map.json
 **/android/**/GeneratedPluginRegistrant.java
 **/android/key.properties
 *.jks
-
-
