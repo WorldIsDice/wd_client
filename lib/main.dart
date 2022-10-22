@@ -1,21 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wd_client/core/data/models/user.dart';
+import 'package:wd_client/core/services/navigation_service.dart';
+import 'package:wd_client/core/theme/theme.dart';
+import 'package:wd_client/features/home/homepage.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'core/data/datasources/routes/app_routes.dart';
+import 'core/data/datasources/routes/approute.i.dart';
+import 'core/services/service_locator.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+Future<void> main() async {
+  // WidgetsFlutterBinding.ensureInitialized();
+  //firebase initialize
+  await setupLocator();
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'WILSON',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Container(),
-    );
-  }
+  final NavigationService navigationService = locator.get<NavigationService>();
+  final User user = locator.get<User>();
+
+  final approute = AppRoutes<dynamic>(
+    // user: _user,
+    // httpManager: _httpManager,
+    // locationManager: _locationManager,
+    // analyticsManager: _analyticsManager,
+    navigationService: navigationService,
+    // routeManager: routeManager,
+    // repository: _repository,
+    // lobbyKey: lobbyKey,
+  );
+
+  final Widget _materialApp = ScreenUtilInit(
+    designSize: const Size(1080, 1920),
+    builder: ((context, child) {
+      return MaterialApp(
+          builder: (BuildContext context, Widget? child) {
+            return child!;
+          },
+          theme: getInitTheme(),
+          navigatorObservers: <NavigatorObserver>[navigationService.routeObserver],
+          navigatorKey: navigationService.navigationKey,
+          home: approute.getHomeWidget(),
+          onGenerateRoute: (RouteSettings settings) {
+            return approute.getRouteFor(settings);
+          });
+    }),
+  );
+
+  runApp(_materialApp);
 }

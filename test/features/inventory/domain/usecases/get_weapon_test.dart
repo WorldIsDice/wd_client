@@ -21,7 +21,7 @@ Future<void> main() async {
     id: 1,
     name: "Einherjar",
     atk: 10,
-    type: Element.Holy,
+    type: Element.holy,
   );
 
   test("should get weapon from the number", () async {
@@ -29,7 +29,7 @@ Future<void> main() async {
       (_) async => Right(testWeapon),
     );
 
-    final result = await usecase(Params(id: testNum));
+    final result = await usecase(const Params(id: testNum));
 
     expect(result, Right(testWeapon));
     verify(mockWeaponRepository.getWeapon(testNum));

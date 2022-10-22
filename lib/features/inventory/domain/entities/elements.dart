@@ -1,13 +1,13 @@
 enum Element {
-  Fire,
-  Water,
-  Ice,
-  Dark,
-  Holy,
-  Chaos,
-  Unknown,
+  fire,
+  water,
+  ice,
+  dark,
+  holy,
+  chaos,
+  unknown,
 }
 
 Element getElement(int element) {
-  return Element.values.firstWhere((Element elem) => elem.index == element, orElse: () => Element.Unknown);
+  return Element.values.firstWhere((Element elem) => elem.index == element, orElse: () => Element.unknown);
 }

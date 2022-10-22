@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wd_client/core/error/exceptions.dart';
 
-import '../../../../core/error/failure.dart';
 import '../models/weapon_model.dart';
 
 abstract class WeaponLocalDatasource {
