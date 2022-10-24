@@ -3,13 +3,14 @@ import 'package:wd_client/core/data/datasources/routes/approute.i.dart';
 import 'package:wd_client/core/data/datasources/routes/routes.dart';
 import 'package:wd_client/core/data/models/user.dart';
 import 'package:wd_client/core/services/navigation_service.dart';
-import 'package:wd_client/core/services/service_locator.dart';
+import 'package:wd_client/features/battle/battleScreen.dart';
 import 'package:wd_client/features/home/homepage.dart';
+import 'package:wd_client/features/splashscreen/splashscreen.dart';
 import 'package:wd_client/features/userprofile/userprofile.dart';
 
 class AppRoutes<T> implements IAppRoutes<T> {
   AppRoutes({
-    // required this.user,
+    required this.user,
 
     // required CoreHttpManager httpManager,
     // required LocationManager locationManager,
@@ -21,7 +22,7 @@ class AppRoutes<T> implements IAppRoutes<T> {
     // required this.lobbyKey,
   });
 
-  final User user = locator.get<User>();
+  final User user;
   final NavigationService navigationService;
 
   // late final RouteManager _routeManager;
@@ -43,12 +44,21 @@ class AppRoutes<T> implements IAppRoutes<T> {
       case Routes.home:
         widget = HomePage(
           navigationservice: navigationService,
+          user: user,
           // title: arguments["title"],
           // message: arguments["message"],
         );
         break;
       case Routes.userprofile:
         widget = UserProfile(
+          navigationservice: navigationService,
+          user: user,
+          // title: arguments["title"],
+          // message: arguments["message"],
+        );
+        break;
+      case Routes.battlescreen:
+        widget = BattleScreen(
           navigationservice: navigationService,
           // title: arguments["title"],
           // message: arguments["message"],
@@ -63,6 +73,7 @@ class AppRoutes<T> implements IAppRoutes<T> {
       default:
         widget = HomePage(
           navigationservice: navigationService,
+          user: user,
         );
       // default:
       //   return fallback(settings, _repository, _routeManager, _httpManager, _analyticsManager);
@@ -87,9 +98,14 @@ class AppRoutes<T> implements IAppRoutes<T> {
 
   @override
   Widget getHomeWidget() {
-    return HomePage(
-      navigationservice: navigationService,
+    return SplashScreen(
+      navigationService: navigationService,
     );
+
+    // HomePage(
+    //   navigationservice: navigationService,
+    //   user: user,
+    // );
     // return SplashScreensw(
     //   appConfig: _appConfig,
     //   routeManager: _routeManager,

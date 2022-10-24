@@ -1,25 +1,100 @@
 import 'package:flutter/material.dart';
 import 'package:wd_client/core/data/datasources/routes/routes.dart';
-import 'package:wd_client/core/data/models/user.dart';
 import 'package:wd_client/core/services/navigation_service.dart';
-import 'package:wd_client/core/services/service_locator.dart';
 import 'package:wd_client/core/theme/theme.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({
+class BattleScreen extends StatefulWidget {
+  BattleScreen({
     required this.navigationservice,
-    required this.user,
     Key? key,
   }) : super(key: key);
 
   final NavigationService navigationservice; // = locator.get<NavigationService>();
-  final User user;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<BattleScreen> createState() => _BattleScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _BattleScreenState extends State<BattleScreen> {
+  Widget getBattleUI({required bool isThisUser}) {
+    return Expanded(
+      child: Container(
+        color: Colors.amber,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: Theme.of(context).appTheme.colors.blue,
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      margin: isThisUser ? EdgeInsets.only(right: 30) : EdgeInsets.only(left: 30),
+                      padding: isThisUser ? EdgeInsets.only(left: 10) : EdgeInsets.only(right: 10),
+                      height: 20,
+                      color: Colors.red,
+                      child: Text(
+                        "200/200",
+                        style: Theme.of(context).appTheme.fontStyle.label.copyWith(color: Theme.of(context).appTheme.colors.white, fontSize: 16),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: isThisUser ? EdgeInsets.only(right: 50) : EdgeInsets.only(left: 50),
+                    child: Text("-30"),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: isThisUser ? EdgeInsets.only(right: 50) : EdgeInsets.only(left: 50),
+                      child: Column(
+                        children: [
+                          Container(
+                            color: Colors.black,
+                            height: 270,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: isThisUser ? MainAxisAlignment.start : MainAxisAlignment.end,
+                children: [
+                  Container(
+                    padding: isThisUser ? EdgeInsets.only(top: 30, left: 10, right: 50) : EdgeInsets.only(top: 30, left: 50, right: 10),
+                    child: Column(
+                      children: [
+                        Text(
+                          "ATK : 10",
+                        ),
+                        Text(
+                          "DEF : 2",
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,73 +198,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Expanded(
                     child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            color: Colors.amber,
-                            margin: const EdgeInsets.all(30),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: Theme.of(context).appTheme.colors.blue,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("MAP"),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
+                      children: <Widget>[getBattleUI(isThisUser: true), getBattleUI(isThisUser: false)],
                     ),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          color: Colors.amber,
-                          margin: const EdgeInsets.all(30),
-                          child: Column(
-                            children: [
-                              InkWell(
-                                onTap: () async {
-                                  await widget.navigationservice.navigateTo(Routes.battlescreen, arguments: <String, dynamic>{});
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(20),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Theme.of(context).appTheme.colors.blue,
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Text(
-                                        "Battle",
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  // OutlinedButton(
-                  //   onPressed: () async {
-                  //     await widget.navigationservice.navigateTo(Routes.userprofile, arguments: <String, dynamic>{});
-                  //   },
-                  //   child: Text(
-                  //     "Hello",
-                  //     style: Theme.of(context).appTheme.fontStyle.hero,
-                  //   ),
-                  // )
                 ],
               ),
             ),

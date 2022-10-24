@@ -5,4 +5,5 @@ class Routes {
   static const String home = "home";
   static const String maintenance = "maintenance";
   static const String userprofile = "userprofile";
+  static const String battlescreen = "battlescreen";
 }

@@ -1,4 +1,4 @@
-enum Element {
+enum GameElement {
   fire,
   water,
   ice,
@@ -8,6 +8,6 @@ enum Element {
   unknown,
 }
 
-Element getElement(int element) {
-  return Element.values.firstWhere((Element elem) => elem.index == element, orElse: () => Element.unknown);
+GameElement getElement(int element) {
+  return GameElement.values.firstWhere((GameElement elem) => elem.index == element, orElse: () => GameElement.unknown);
 }

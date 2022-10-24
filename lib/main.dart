@@ -18,7 +18,7 @@ Future<void> main() async {
   final User user = locator.get<User>();
 
   final approute = AppRoutes<dynamic>(
-    // user: _user,
+    user: user,
     // httpManager: _httpManager,
     // locationManager: _locationManager,
     // analyticsManager: _analyticsManager,

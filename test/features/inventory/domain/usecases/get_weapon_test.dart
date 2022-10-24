@@ -21,7 +21,7 @@ Future<void> main() async {
     id: 1,
     name: "Einherjar",
     atk: 10,
-    type: Element.holy,
+    type: GameElement.holy,
   );
 
   test("should get weapon from the number", () async {

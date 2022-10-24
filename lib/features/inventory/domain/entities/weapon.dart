@@ -5,7 +5,7 @@ class Weapon extends Equatable {
   final int id;
   final String name;
   final int atk;
-  final Element type;
+  final GameElement type;
 
   Weapon({
     required this.id,
