@@ -38,10 +38,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> onInitState() async {
     splashController.setLoadingPercent(1.0);
-    await Future.delayed(const Duration(seconds: 2), () {});
-    splashController.setLoadingPercent(10.0);
-    await Future.delayed(const Duration(seconds: 2), () {});
-    splashController.setLoadingPercent(40.0);
+    // await Future.delayed(const Duration(seconds: 2), () {});
+    // splashController.setLoadingPercent(10.0);
+    // await Future.delayed(const Duration(seconds: 2), () {});
+    // splashController.setLoadingPercent(40.0);
     await Future.delayed(const Duration(seconds: 2), () {});
     User? user = await splashController.getUser();
     if (user != null) {

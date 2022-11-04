@@ -41,7 +41,7 @@ class User with ChangeNotifier {
     name = json["name"];
     coins = json["coins"];
     gems = json["gems"];
-    userStats = json["userStats"];
+    userStats = UserStats.fromJson(json["userStats"]);
     notifyListeners();
   }
 
@@ -96,4 +96,9 @@ class User with ChangeNotifier {
         "gems": gems,
         "userStats": userStats,
       };
+
+  @override
+  String toString() {
+    return '"user" : {"id": $id, "key": $key, "email": $email, "dob": $dob, "gender": $gender, "name": $name, "coins": $coins, "gems": $gems, ${userStats.toString()}}';
+  }
 }

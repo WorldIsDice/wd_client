@@ -6,6 +6,7 @@ import 'package:wd_client/core/data/models/userstats.dart';
 import 'package:wd_client/core/services/navigation_service.dart';
 import 'package:wd_client/core/theme/theme.dart';
 import 'package:provider/provider.dart';
+import 'package:wd_client/features/common/user_character/character.dart';
 import '../../core/data/datasources/routes/routes.dart';
 
 class UserProfile extends StatefulWidget {
@@ -80,13 +81,7 @@ class _UserProfileState extends State<UserProfile> {
                                           Column(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
-                                              Expanded(
-                                                child: Container(
-                                                  width: 100,
-                                                  color: Colors.amber,
-                                                  child: Text("Character"),
-                                                ),
-                                              ),
+                                              Character(),
                                             ],
                                           ),
                                           Expanded(

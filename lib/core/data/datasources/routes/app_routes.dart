@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wd_client/core/data/datasources/repositories/user_repository.dart';
 import 'package:wd_client/core/data/datasources/routes/approute.i.dart';
 import 'package:wd_client/core/data/datasources/routes/routes.dart';
 import 'package:wd_client/core/data/models/user.dart';
@@ -20,10 +21,12 @@ class AppRoutes<T> implements IAppRoutes<T> {
     // required this.fallback,
     // required IRepository repository,
     // required this.lobbyKey,
+    required this.userRepository,
   });
 
   final User user;
   final NavigationService navigationService;
+  final UserRepository userRepository;
 
   // late final RouteManager _routeManager;
   // late final CoreHttpManager _httpManager;
@@ -59,7 +62,9 @@ class AppRoutes<T> implements IAppRoutes<T> {
         break;
       case Routes.battlescreen:
         widget = BattleScreen(
-          navigationservice: navigationService,
+          navigationService: navigationService,
+          user: user,
+          userRepository: userRepository,
           // title: arguments["title"],
           // message: arguments["message"],
         );

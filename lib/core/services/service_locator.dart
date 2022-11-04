@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:get_it/get_it.dart';
+import 'package:wd_client/core/data/datasources/repositories/user_repository.dart';
 import 'package:wd_client/core/data/models/user.dart';
 import 'package:wd_client/core/services/navigation_service.dart';
 
@@ -10,4 +11,5 @@ Completer<void> locatorReady = Completer<void>();
 Future<void> setupLocator() async {
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => User(id: -1));
+  locator.registerLazySingleton(() => UserRepository());
 }
